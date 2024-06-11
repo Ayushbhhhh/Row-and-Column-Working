@@ -2,105 +2,95 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  //constructor
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  //constructor
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("widget.title"),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Icon(Icons.notifications),
+        debugShowCheckedModeBanner: false, // Remove debug banner
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Recipe Layout'),
+            centerTitle: true,
           ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Text("Action"),
-          )
-        ],
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text("Strawberry Pavlova:"),
-            Text(
-                "pavlova is a meringue-bassed dessert named after the russsian ballerina anna pavlova,pavlova,pavlova features a crisp crust  and soft,light inside,topped with fruit and whipped creams :"),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.star),
-                Text("Prep:"),
-                Text("20-30mins")
-                Icon(Icons.star),
-                Icon(Icons.star),
-                Icon(Icons.star),
-                Icon(Icons.star),
-                Icon(Icons.star)
-                //text
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.star),
-                    Text("Prep:"),
-                    Text("20-30mins")
+                    Text(
+                      'Strawberry Pavlova',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlova. Pavlova features a crisp crust and soft, light inside, topped with fruit and whipped cream.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: List.generate(5, (index) {
+                              return Icon(
+                                Icons.star,
+                                color: Colors.orange,
+                                size: 20,
+                              );
+                            }),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '170 Reviews',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Icon(Icons.timer),
+                            SizedBox(height: 5),
+                            Text('PREP:'),
+                            Text('25 min'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Icon(Icons.timer_off),
+                            SizedBox(height: 5),
+                            Text('COOK:'),
+                            Text('1 hr'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Icon(Icons.restaurant),
+                            SizedBox(height: 5),
+                            Text('FEEDS:'),
+                            Text('4-6'),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //body of the function
-          print("FAB is clicked");
-        },
-        tooltip: 'Increment Changed',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
